@@ -1,7 +1,6 @@
 package com.pjmb.hiberspring;
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity
 @Table(name="student")
@@ -27,6 +26,10 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() {

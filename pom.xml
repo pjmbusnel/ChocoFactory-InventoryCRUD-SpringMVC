@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pjmb</groupId>
-	<artifactId>hiberspring</artifactId>
+	<artifactId>CrudSpring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hiberspring</name>
 	<description>Demo project for Spring Boot and Hibernate</description>
