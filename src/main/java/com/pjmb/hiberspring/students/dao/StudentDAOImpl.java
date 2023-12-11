@@ -1,4 +1,4 @@
-package com.pjmb.hiberspring;
+package com.pjmb.hiberspring.students.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -20,20 +20,20 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     @Transactional
-    public void save(Student theStudent) {
+    public void save(StudentEntity theStudent) {
         entityManager.persist(theStudent);
     }
 
     @Override
     @Transactional
-    public void update(Student theStudent) {
+    public void update(StudentEntity theStudent) {
         entityManager.merge(theStudent);
     }
 
     @Override
     @Transactional
     public void delete(Integer id) {
-        Student theStudent = entityManager.find(Student.class, id);
+        StudentEntity theStudent = entityManager.find(StudentEntity.class, id);
         entityManager.remove(theStudent);
     }
 
@@ -41,32 +41,32 @@ public class StudentDAOImpl implements StudentDAO {
     @Transactional
     public int deleteAll() {
         int nbRowDeleted = entityManager
-                .createQuery("DELETE FROM Student")
+                .createQuery("DELETE FROM StudentEntity")
                 .executeUpdate();
         return nbRowDeleted;
     }
 
 
     @Override
-    public Student findById(Integer id) {
-        return entityManager.find(Student.class, id);
+    public StudentEntity findById(Integer id) {
+        return entityManager.find(StudentEntity.class, id);
     }
 
     @Override
-    public List<Student> findAll() {
-        TypedQuery<Student> findStudentsQuery = entityManager.createQuery("FROM Student", Student.class);
+    public List<StudentEntity> findAll() {
+        TypedQuery<StudentEntity> findStudentsQuery = entityManager.createQuery("FROM StudentEntity", StudentEntity.class);
         return findStudentsQuery.getResultList();
     }
 
     @Override
-    public List<Student> findAllByLastName(String lastName) {
-        TypedQuery<Student> findStudentsQuery = entityManager.createQuery("FROM Student WHERE lastName LIKE '%"+lastName+"%' order by lastName desc", Student.class);
+    public List<StudentEntity> findAllByLastName(String lastName) {
+        TypedQuery<StudentEntity> findStudentsQuery = entityManager.createQuery("FROM StudentEntity WHERE lastName LIKE '%"+lastName+"%' order by lastName desc", StudentEntity.class);
         return findStudentsQuery.getResultList();
     }
 
     @Override
-    public List<Student> findAllByFirstName(String theFirstName) {
-        TypedQuery<Student> findStudentsQuery = entityManager.createQuery("FROM Student WHERE firstName=:theParam", Student.class);
+    public List<StudentEntity> findAllByFirstName(String theFirstName) {
+        TypedQuery<StudentEntity> findStudentsQuery = entityManager.createQuery("FROM StudentEntity WHERE firstName=:theParam", StudentEntity.class);
         findStudentsQuery.setParameter("theParam", theFirstName);
         return findStudentsQuery.getResultList();
     }

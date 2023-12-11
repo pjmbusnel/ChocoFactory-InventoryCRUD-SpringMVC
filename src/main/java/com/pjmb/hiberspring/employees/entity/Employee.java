@@ -1,11 +1,12 @@
-package com.pjmb.hiberspring;
+package com.pjmb.hiberspring.employees.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="student")
-public class Student {
+@Table(name="employee")
+public class Employee {
 
+    // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -20,16 +21,26 @@ public class Student {
     @Column(name="email")
     private String email;
 
-    public Student() {}
 
-    public Student(String firstName, String lastName, String email) {
+    // define constructors
+    public Employee() {
+
+    }
+
+    public Employee(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
+    // define getter/setter
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -56,9 +67,10 @@ public class Student {
         this.email = email;
     }
 
+    // define toString
     @Override
     public String toString() {
-        return "Student{" +
+        return "Employee{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
