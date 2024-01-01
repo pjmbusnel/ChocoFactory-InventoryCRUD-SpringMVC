@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -19,20 +20,20 @@ public class EmployeeRestController {
     }
 
     @GetMapping("/employees")
-    public List<Employee> getStudents() {
+    public List<Employee> getEmployees() {
         List<Employee> theEmployees = employeeService.findAll();
         return theEmployees;
     }
 
     @GetMapping("/employees/{employeeId}")
     public Employee getEmployee(@PathVariable int employeeId) {
-        Employee dbEmployee = employeeService.findById(employeeId);
+        Optional<Employee> dbEmployee = employeeService.findById(employeeId);
 
-        if (dbEmployee == null) {
+        if (dbEmployee.isEmpty()) {
             throw new RuntimeException("Employee id not found - " + employeeId);
         }
 
-        return dbEmployee;
+        return dbEmployee.get();
     }
 
     @PostMapping("/employees")
@@ -55,9 +56,9 @@ public class EmployeeRestController {
     @DeleteMapping("/employees/{employeeId}")
     public String deleteEmployee(@PathVariable int employeeId) {
         System.out.println("Delete Employee");
-        Employee dbEmployee = employeeService.findById(employeeId);
+        Optional<Employee> dbEmployee = employeeService.findById(employeeId);
 
-        if (dbEmployee == null) {
+        if (dbEmployee.isEmpty()) {
             throw new RuntimeException("Employee id not found - " + employeeId);
         }
 
