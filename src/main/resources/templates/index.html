@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Acme Corp. Employees Listing</title>
+</head>
+
+<body>
+<div class="container">
+
+<form class="float-end" action="#" th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+</form>
+<h3>Acme Corp. Employees Listing</h3>
+<br>
+<hr>
+
+<p> Hi, <span sec:authentication="principal.username"></span> !
+    Welcome to Acme Corp. Employees Listing Page </p>
+<p> Current Role(s): <span sec:authentication="principal.authorities"></span> </p>
+<hr>
+
+    <!-- Add a button for Managers and Admins -->
+    <div sec:authorize="hasRole('MANAGER')">
+        <a th:href="@{/employees/showFormForAdd}"
+           class="btn btn-primary btn-sm mb-3">
+            Add Employee
+        </a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempEmployee : ${employees}">
+
+            <td th:text="${tempEmployee.firstName}" />
+            <td th:text="${tempEmployee.lastName}" />
+            <td th:text="${tempEmployee.email}" />
+
+            <!-- Add update button/link for MANAGER only -->
+            <td>
+                <a sec:authorize="hasRole('MANAGER')" th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+
+                <!-- Add "delete" button/link for ADMIN only -->
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/employees/delete(employeeId=${tempEmployee.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+                    Delete
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+<hr>
+
+
+</div>
+</body>
+
+</html>

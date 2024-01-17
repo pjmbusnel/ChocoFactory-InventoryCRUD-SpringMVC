@@ -1,13 +1,13 @@
-package com.pjmb.hiberspring.products;
+package com.pjmb.spring.employees;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProductCrudSpringApplication {
+public class EmployeeCrudSpringApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProductCrudSpringApplication.class, args);
+		SpringApplication.run(EmployeeCrudSpringApplication.class, args);
 	}
 
 }

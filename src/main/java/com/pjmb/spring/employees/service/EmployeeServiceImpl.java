@@ -1,7 +1,7 @@
-package com.pjmb.hiberspring.employees.service;
+package com.pjmb.spring.employees.service;
 
-import com.pjmb.hiberspring.employees.entity.Employee;
-import com.pjmb.hiberspring.employees.repository.EmployeeRepository;
+import com.pjmb.spring.employees.entity.Employee;
+import com.pjmb.spring.employees.repository.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<Employee> findById(int id) {
-        return employeeRepo.findById(id);
+    public Employee findById(int id) {
+        Optional<Employee> result = employeeRepo.findById(id);
+        Employee theEmployee;
+        if (result.isPresent()) {
+            theEmployee = result.get();
+        }
+        else {
+            throw new RuntimeException("Did not find employee id - " + id);
+        }
+        return theEmployee;
     }
 
     @Override

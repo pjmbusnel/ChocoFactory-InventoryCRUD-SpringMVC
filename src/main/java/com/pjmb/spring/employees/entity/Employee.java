@@ -1,4 +1,4 @@
-package com.pjmb.hiberspring.employees.entity;
+package com.pjmb.spring.employees.entity;
 
 import jakarta.persistence.*;
 
