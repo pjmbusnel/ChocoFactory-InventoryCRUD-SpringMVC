@@ -1,0 +1,20 @@
+.btn {
+    color: #F6B17A;
+    background-color: #2D3250;
+    border-color: #2D3250;
+}
+
+.loginbox {
+    border-color:  #9EC8B9;
+}
+.card-header.bg-info {
+    border-color: #9EC8B9;
+}
+
+.card.border-info {
+    border-color: #9EC8B9;
+}
+
+.border-info {
+    background-color: #9EC8B9;
+}
