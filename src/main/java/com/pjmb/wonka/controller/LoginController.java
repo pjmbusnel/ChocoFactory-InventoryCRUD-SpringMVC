@@ -1,4 +1,4 @@
-package com.pjmb.spring.employees.controller;
+package com.pjmb.wonka.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

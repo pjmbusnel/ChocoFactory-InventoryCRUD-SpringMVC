@@ -1,4 +1,4 @@
-package com.pjmb.spring.employees.security;
+package com.pjmb.wonka.security;
 
 
 import org.springframework.context.annotation.Bean;
@@ -31,20 +31,20 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        //    /employees/                   (Main page/List) for Employee
-        //    /employees/showFormForAdd     (Add employee) for Manager
-        //    /employees/showFormForUpdate  (Edit employee) for Manager
-        //    /employees/save               (Save employee) for Manager
-        //    /employees/delete             (Delete employee) for Admin
+        //    /products/                   (Main page/List) for User
+        //    /products/showFormForAdd     (Add product) for Admin
+        //    /products/showFormForUpdate  (Edit product) for Admin
+        //    /products/save               (Save product) for Admin
+        //    /products/delete             (Delete product) for Admin
 
         http.authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers("/employees/ ").hasRole("EMPLOYEE")
-                                .requestMatchers("/employees/list ").hasRole("EMPLOYEE")
-                                .requestMatchers("/employees/showFormForAdd").hasRole("MANAGER")
-                                .requestMatchers("/employees/showFormForUpdate").hasRole("MANAGER")
-                                .requestMatchers("/employees/save").hasRole("MANAGER")
-                                .requestMatchers("/employees/delete").hasRole("ADMIN")
+                                .requestMatchers("/products/ ").hasRole("USER")
+                                .requestMatchers("/products/list ").hasRole("USER")
+                                .requestMatchers("/products/showFormForAdd").hasRole("ADMIN")
+                                .requestMatchers("/products/showFormForUpdate").hasRole("ADMIN")
+                                .requestMatchers("/products/save").hasRole("ADMIN")
+                                .requestMatchers("/products/delete").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form ->
@@ -61,31 +61,5 @@ public class SecurityConfiguration {
 
         return http.build();
     }
-
-    /*
-    @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-
-        UserDetails john = User.builder()
-                .username("john")
-                .password("{noop}test123")
-                .roles("EMPLOYEE")
-                .build();
-
-        UserDetails mary = User.builder()
-                .username("mary")
-                .password("{noop}test123")
-                .roles("EMPLOYEE", "MANAGER")
-                .build();
-
-        UserDetails susan = User.builder()
-                .username("susan")
-                .password("{noop}test123")
-                .roles("EMPLOYEE", "MANAGER", "ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(john, mary, susan);
-    }
-    */
 
 }
