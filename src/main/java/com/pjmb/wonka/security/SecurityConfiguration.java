@@ -19,11 +19,11 @@ public class SecurityConfiguration {
 
         // define query to retrieve a user by username
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "select user_id, pw, active from members where user_id=?");
+                "select username, password, active from members where username=?");
 
         // define query to retrieve the authorities/roles by username
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-                "select user_id, role from roles where user_id=?");
+                "select username, authority from authorities where username=?");
 
         return jdbcUserDetailsManager;
     }

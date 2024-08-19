@@ -1,9 +1,16 @@
 package com.pjmb.wonka.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="product")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Product {
 
     @Id
@@ -11,88 +18,27 @@ public class Product {
     @Column(name="id")
     private int id;
 
+    @NotBlank(message = "Name is required")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     @Column(name="name")
     private String name;
 
+    @Size(max = 50, message = "Description must be 50 characters or less")
     @Column(name="description")
     private String description;
 
+    @Size(max = 50, message = "Origin must be 50 characters or less")
     @Column(name="origin")
     private String origin;
 
+    @NotBlank(message = "Format is required")
+    @Size(min = 3, max = 50, message = "Format must be between 3 and 50 characters")
     @Column(name="format")
     private String format;
 
+    @NotNull(message = "Weight is required")
+    @Min(value = 0, message = "Weight must be equal to or greater than 0 grams")
     @Column(name="weight")
     private Double weight;
 
-    public Product() {}
-
-    public Product(String name, String description, String origin, String format, Double weight) {
-        this.name = name;
-        this.description = description;
-        this.origin = origin;
-        this.format = format;
-        this.weight = weight;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", origin='" + origin + '\'' +
-                ", format='" + format + '\'' +
-                ", weight=" + weight +
-                '}';
-    }
 }

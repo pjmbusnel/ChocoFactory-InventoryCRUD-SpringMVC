@@ -2,8 +2,10 @@ package com.pjmb.wonka.controller;
 
 import com.pjmb.wonka.entity.Product;
 import com.pjmb.wonka.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +44,12 @@ public class ProductController {
 	}
 
 	@PostMapping("/save")
-	public String saveProduct(@ModelAttribute("product") Product product) {
+	public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model theModel) {
+		if (bindingResult.hasErrors()) {
+			// if validation fails, return to the form with error messages
+			return "product-form";
+		}
+		// save the product if validation passes
 		productService.save(product);
 		return "redirect:/";
 	}
